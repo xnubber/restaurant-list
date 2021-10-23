@@ -14,3 +14,9 @@ clone to local device
 ```
 git clone https://github.com/xnubber/restaurant-list.git
 ```
+
+cd to directory
+
+```
+cd restaurant-list
+```
