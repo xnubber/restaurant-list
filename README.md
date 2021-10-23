@@ -27,10 +27,10 @@ npm install
 npm install
 ```
 
-run dev
+run 
 
 ```
-npm run dev
+npm run start
 ```
 
 when the **localhost:3000** show up on the terminal, means you can type **localhost:3000** as URL on web browser to see the web 
