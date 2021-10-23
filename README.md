@@ -34,3 +34,8 @@ npm run dev
 ```
 
 when the **localhost:3000** show up on the terminal, means you can type **localhost:3000** as URL on web browser to see the web 
+
+## References
+[AC Camp Restaurant List Template -index](https://codepen.io/alpha-camp/pen/yrLbrZ)
+[AC Camp Restaurant List Template -show](https://codepen.io/alpha-camp/pen/JVjNgG)
+
