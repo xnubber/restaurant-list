@@ -6,7 +6,6 @@ A simple web app made by Node.js and Express
 
 ## Prerequisites
 - Node.js v14.18.1
-- Express
 
 ## Install
 clone to local device
