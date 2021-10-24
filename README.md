@@ -1,8 +1,9 @@
 # Restaurant List
-A simple web app made by Node.js and Express
+A simple web page that have few restaurants, you can see a restaurant's detail or search specific ones.
 
 ## Features
 - searching restaurants by name or category
+- showing individual restaurant's detail
 
 ## Prerequisites
 - Node.js v14.18.1
