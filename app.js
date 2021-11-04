@@ -51,7 +51,7 @@ app.post('/restaurants', async (req, res) => {
 
 // show page
 app.get('/restaurants/:id', async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('show', { restaurant })
 })
@@ -60,7 +60,7 @@ app.get('/restaurants/:id', async (req, res) => {
 app.get('/restaurants/:id/edit', async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
-  res.render('edit', {restaurant})
+  res.render('edit', { restaurant })
 })
 
 app.patch('/restaurants/:id', async (req, res) => {
@@ -80,13 +80,19 @@ app.delete('/restaurants/:id', async (req, res) => {
 // search
 app.get('/search', async (req, res) => {
   let keyword = req.query.keyword.toLowerCase()
-  if(!keyword) res.redirect('/')
+  if (!keyword) res.redirect('/')
   const allRestaurants = await Restaurant.find({}).lean()
   const restaurants = allRestaurants.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword) ||
       restaurant.category.toLowerCase().includes(keyword)
   })
-  res.render('index', { restaurants, keyword: req.query.keyword })
+ 
+  if (restaurants.length === 0) {
+    res.render('error')
+  } else {
+    res.render('index', { restaurants, keyword: req.query.keyword })
+  }
+
 })
 
 // listen
