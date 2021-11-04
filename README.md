@@ -1,10 +1,11 @@
 # Restaurant List
+![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant.jpg)
 A simple web page that have few restaurants, you can see a restaurant's detail or search specific ones.
 
 ## Features
 - searching restaurants by name or category
 - showing individual restaurant's detail
-- user can add a restaurant
+- user can add a restaurant(With a fake default img URL)
 - user can edit restaurant's information
 - user can delete restaurant
 
