@@ -2,8 +2,11 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const path = require('path')
 // restaurant data
 const restaurantList = require('./restaurant.json')
+// 
+app.set('views', path.join(__dirname, 'views'))
 
 // exprss-handlebars
 const exphbs = require('express-handlebars')
@@ -13,9 +16,15 @@ app.set('view engine', 'handlebars')
 // static
 app.use(express.static('public'))
 
+
 // index page
 app.get('/', (req, res) => {
   res.render('index', { restaurants: restaurantList.results })
+})
+
+// create page
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
 })
 
 // show page
