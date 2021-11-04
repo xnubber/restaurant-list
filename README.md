@@ -1,4 +1,5 @@
 # Restaurant List
+![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant.jpg)
 A simple web page that have few restaurants, you can see a restaurant's detail or search specific ones.
 
 ## Features
