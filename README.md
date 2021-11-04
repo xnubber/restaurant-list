@@ -5,7 +5,7 @@ A simple web page that have few restaurants, you can see a restaurant's detail o
 ## Features
 - searching restaurants by name or category
 - showing individual restaurant's detail
-- user can add a restaurant
+- user can add a restaurant(With a fake default img URL)
 - user can edit restaurant's information
 - user can delete restaurant
 
