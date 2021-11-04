@@ -1,36 +1,37 @@
 <h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
 <div class="container">
 
-  <form action="/restaurants" method="POST">
+  <form action="/restaurants" method="POST" class="needs-validation" novalidate>
     <label for="name" class="form-label mt-3">Name</label>
-    <input type="text" placeholder="Name" id="name" name="name" class="form-control">
+    <input type="text" placeholder="Name" id="name" name="name" class="form-control" required>
+
     <div class="row">
       <div class="col">
         <label for="location" class="form-label mt-3">Location</label>
-        <input type="text" placeholder="location" id="location" name="location" class="form-control">
+        <input type="text" placeholder="location" id="location" name="location" class="form-control" required>
       </div>
       <div class="col">
         <label for="map" class="form-label mt-3">Google Map</label>
-        <input type="text" placeholder="url" id="map" name="map" class="form-control ">
+        <input type="text" placeholder="url" id="map" name="map" class="form-control " required>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <label for="category" class="form-label mt-3">Category</label>
-        <input type="text" placeholder="category" id="category" name="category" class="form-control">
+        <input type="text" placeholder="category" id="category" name="category" class="form-control" required>
       </div>
       <div class="col">
         <label for="rating" class="form-label mt-3">Rating</label>
-        <input type="number" placeholder="0.0" id="rating" name="rating" class="form-control ">
+        <input type="number" placeholder="0.0" id="rating" name="rating" class="form-control " required>
       </div>
     </div>
     <label for="phone" class="form-label mt-3">Phone</label>
-    <input type="text" placeholder="Phone number" id="phone" name="phone" class="form-control">
+    <input type="text" placeholder="Phone number" id="phone" name="phone" class="form-control" required>
     <label for="description" class="form-label mt-3">Description</label>
-    <textarea type="text" placeholder="Write something..." id="description" name="description"
-      class="form-control"></textarea>
+    <textarea type="text" placeholder="Write something..." id="description" name="description" class="form-control"
+      required></textarea>
     <label for="image" class="form-label mt-3">Image</label>
-    <input type="text" placeholder="" id="image" name="image" class="form-control">
+    <input type="text" placeholder="" id="image" name="image" class="form-control" required>
     <button type="submit" class="btn btn-success mx-auto mt-3">Add</button>
     <a href="/" class="d-flex justify-content-end">All Restaurants</a>
   </form>

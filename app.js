@@ -5,6 +5,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 const restaurantList = require('./restaurant.json')
+const methodOverride = require('method-override')
 // mongoose
 mongoose.connect('mongodb://localhost:27017/restaurant-list')
 
@@ -19,6 +20,7 @@ db.once('open', () => {
 // 
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 
 // exprss-handlebars
 const exphbs = require('express-handlebars')
@@ -52,6 +54,19 @@ app.get('/restaurants/:id', async (req, res) => {
   const {id} = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('show', { restaurant })
+})
+
+// update page
+app.get('/restaurants/:id/edit', async (req, res) => {
+  const { id } = req.params
+  const restaurant = await Restaurant.findById(id).lean()
+  res.render('edit', {restaurant})
+})
+
+app.patch('/restaurants/:id', async (req, res) => {
+  const { id } = req.params
+  const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
+  res.redirect(`/restaurants/${id}`)
 })
 
 // search
