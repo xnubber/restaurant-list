@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const path = require('path')
 const mongoose = require('mongoose')
+const Restaurant = require('./models/restaurant')
 const restaurantList = require('./restaurant.json')
 // mongoose
 mongoose.connect('mongodb://localhost:27017/restaurant-list')
@@ -21,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // exprss-handlebars
 const exphbs = require('express-handlebars')
-const Restaurant = require('./models/restaurant')
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
@@ -54,13 +55,17 @@ app.get('/restaurants/:id', async (req, res) => {
 })
 
 // search
-app.get('/search', (req, res) => {
+app.get('/search', async (req, res) => {
   let keyword = req.query.keyword.toLowerCase()
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword) || 
-    restaurant.category.toLowerCase().includes(keyword)
+  if(!keyword) res.redirect('/')
+  const allRestaurants = await Restaurant.find({}).lean()
+  const restaurants = allRestaurants.filter(restaurant => {
+    console.log(keyword)
+    console.log(restaurant.name.toLowerCase())
+    return restaurant.name.toLowerCase().includes(keyword) ||
+      restaurant.category.toLowerCase().includes(keyword)
   })
-  res.render('index', { restaurants: restaurants, keyword: req.query.keyword })
+  res.render('index', { restaurants, keyword: req.query.keyword })
 })
 
 // listen
