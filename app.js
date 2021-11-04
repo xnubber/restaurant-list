@@ -1,12 +1,21 @@
-// express
 const express = require('express')
 const app = express()
 const port = 3000
 const path = require('path')
-// restaurant data
+const mongoose = require('mongoose')
 const restaurantList = require('./restaurant.json')
 // 
 app.set('views', path.join(__dirname, 'views'))
+mongoose.connect('mongodb://localhost:27017/restaurant-list')
+
+const db = mongoose.connection
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
 
 // exprss-handlebars
 const exphbs = require('express-handlebars')
@@ -26,6 +35,8 @@ app.get('/', (req, res) => {
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
 })
+
+
 
 // show page
 app.get('/restaurants/:id', (req, res) => {
