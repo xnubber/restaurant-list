@@ -69,14 +69,20 @@ app.patch('/restaurants/:id', async (req, res) => {
   res.redirect(`/restaurants/${id}`)
 })
 
+// delete
+app.delete('/restaurants/:id', async (req, res) => {
+  const { id } = req.params
+  await Restaurant.findByIdAndDelete(id)
+  res.redirect('/')
+})
+
+
 // search
 app.get('/search', async (req, res) => {
   let keyword = req.query.keyword.toLowerCase()
   if(!keyword) res.redirect('/')
   const allRestaurants = await Restaurant.find({}).lean()
   const restaurants = allRestaurants.filter(restaurant => {
-    console.log(keyword)
-    console.log(restaurant.name.toLowerCase())
     return restaurant.name.toLowerCase().includes(keyword) ||
       restaurant.category.toLowerCase().includes(keyword)
   })
@@ -85,5 +91,5 @@ app.get('/search', async (req, res) => {
 
 // listen
 app.listen(port, () => {
-  console.log(`localhost:${port}`)
+  console.log(`Express is listening on localhost:${port}`)
 })
