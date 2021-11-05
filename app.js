@@ -51,9 +51,9 @@ app.post('/restaurants', async (req, res) => {
 
 // show page
 app.get('/restaurants/:id', async (req, res) => {
-  const { id } = req.params
-  const restaurant = await Restaurant.findById(id).lean()
-  res.render('show', { restaurant })
+    const { id } = req.params
+    const restaurant = await Restaurant.findById(id).lean()
+    res.render('show', { restaurant })
 })
 
 // update page
@@ -94,6 +94,7 @@ app.get('/search', async (req, res) => {
   }
 
 })
+
 
 // listen
 app.listen(port, () => {
