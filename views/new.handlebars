@@ -22,7 +22,10 @@
       </div>
       <div class="col">
         <label for="rating" class="form-label mt-3">Rating</label>
-        <input type="number" placeholder="0.0" id="rating" name="rating" class="form-control" min="0" max="5" step="0.1" required>
+        <input type="number" placeholder="0.0 ~ 5.0" id="rating" name="rating" class="form-control" min="0" max="5" step="0.1" required>
+        <div class="invalid-feedback">
+          Rating has to be 0.0 ~ 5.0.
+        </div>
       </div>
     </div>
     <label for="phone" class="form-label mt-3">Phone</label>
