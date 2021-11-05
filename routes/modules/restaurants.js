@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const catchAsync = require('../../helpers/catchAsync')
+const ExpressError = require('../../helpers/ExpressError')
 
 
 
@@ -20,6 +21,7 @@ router.post('/', catchAsync(async (req, res, next) => {
 router.get('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
+  if(!restaurant) throw new ExpressError('Page Not Found', 404)
   res.render('show', { restaurant })
 }))
 

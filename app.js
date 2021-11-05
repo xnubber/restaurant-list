@@ -24,8 +24,10 @@ app.set('view engine', 'handlebars')
 // static
 app.use(express.static('public'))
 
+// error handler
 app.use((err, req, res, next) => {
-  res.send('Something went wrong!')
+  const {message, statusCode} = err
+  res.status(statusCode).render('error', {message})
 })
 
 // listen
