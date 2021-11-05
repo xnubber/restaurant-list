@@ -24,6 +24,10 @@ app.set('view engine', 'handlebars')
 // static
 app.use(express.static('public'))
 
+app.use((err, req, res, next) => {
+  res.send('Something went wrong!')
+})
+
 // listen
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)

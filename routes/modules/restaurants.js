@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
+const catchAsync = require('../../helpers/catchAsync')
 
 
 
@@ -9,38 +10,38 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 
-router.post('/', async (req, res) => {
-  const newRestaurant = new Restaurant(req.body)
-  await newRestaurant.save()
-  res.redirect('/')
-})
+router.post('/', catchAsync(async (req, res, next) => {
+    const newRestaurant = new Restaurant(req.body)
+    await newRestaurant.save()
+    res.redirect('/')
+}))
 
 // show page
-router.get('/:id', async (req, res) => {
+router.get('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('show', { restaurant })
-})
+}))
 
 // update page
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('edit', { restaurant })
-})
+}))
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
   res.redirect(`/restaurants/${id}`)
-})
+}))
 
 // delete
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   await Restaurant.findByIdAndDelete(id)
   res.redirect('/')
-})
+}))
 
 
 module.exports = router
