@@ -18,7 +18,7 @@ router.post('/', catchAsync(async (req, res, next) => {
 }))
 
 // show page
-router.get('/:id', catchAsync(async (req, res) => {
+router.get('/:id', catchAsync(async (req, res, next) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   if(!restaurant) throw new ExpressError('Page Not Found', 404)
@@ -26,30 +26,26 @@ router.get('/:id', catchAsync(async (req, res) => {
 }))
 
 // update page
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', catchAsync(async (req, res, next) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('edit', { restaurant })
 }))
 
-router.patch('/:id', catchAsync(async (req, res) => {
+router.patch('/:id', catchAsync(async (req, res, next) => {
   const { id } = req.params
   const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
   res.redirect(`/restaurants/${id}`)
 }))
 
 // delete
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', catchAsync(async (req, res, next) => {
   const { id } = req.params
   await Restaurant.findByIdAndDelete(id)
   res.redirect('/')
 }))
 
-// error handler
-router.use((err, req, res, next) => {
-  const { message, statusCode } = err
-  res.status(statusCode).render('error', { message })
-})
+
 
 
 module.exports = router

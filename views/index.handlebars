@@ -9,19 +9,30 @@
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
+          <div class="dropdown ml-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/?name=name&sort=asc">A - Z</a>
+              <a class="dropdown-item" href="/?name=name&sort=desc">Z - A</a>
+              <a class="dropdown-item" href="/?name=category&sort=asc">Category</a>
+              <a class="dropdown-item" href="/?name=location&sort=asc">Location</a>
+            </div>
+          </div>
         </div>
       </form>
     </div>
   </div>
-  
+
 </div>
 
-  
+
 {{!-- restaurants --}}
 <div class="container-fluid mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
-      <a href="/restaurants/new" class="d-flex justify-content-end"><i class="fas fa-plus"></i>新增餐廳</a>
       <div class="card-columns">
         {{#each restaurants}}
         <a href="/restaurants/{{this._id}}" class="text-secondary">
@@ -44,7 +55,7 @@
                   <button class="btn btn-info">Delete</button>
                 </form>
               </div>
-              
+
 
             </div>
           </div>

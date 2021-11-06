@@ -21,6 +21,7 @@ header {
 }
 
 .search-bar {
+  width: 100%;
   z-index: 1;
   position: -webkit-sticky;
   position: sticky;
@@ -29,7 +30,8 @@ header {
 
 .search-bar .search-bar-outer {
   margin: 0 auto;
-  max-width: 680px;
+  /* max-width: 680px; */
+  
   background-color: #fce2cf;
   border-radius: 8px;
   padding: 15px 30px;
@@ -65,6 +67,7 @@ header {
 
 .card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  width: 25vw;
 }
 
 .card img{
@@ -110,7 +113,7 @@ header {
 }
 
 @media screen and (max-width: 575px) {
-
+  
   .card img{
     height: auto;
   }
