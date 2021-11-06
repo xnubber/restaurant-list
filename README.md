@@ -1,5 +1,5 @@
 # Restaurant List
-![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant.jpg)
+![image](https://github.com/xnubber/restaurant-list/blob/AC-2-3-A6/public/img/restaurant-A6.jpg)
 A simple web page that have few restaurants, you can see a restaurant's detail or search specific ones.
 
 ## Features
@@ -8,6 +8,7 @@ A simple web page that have few restaurants, you can see a restaurant's detail o
 - user can add a restaurant(With a fake default img URL)
 - user can edit restaurant's information
 - user can delete restaurant
+- 
 
 ## Prerequisites
 - Node.js v14.18.1
