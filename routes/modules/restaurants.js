@@ -45,5 +45,11 @@ router.delete('/:id', catchAsync(async (req, res) => {
   res.redirect('/')
 }))
 
+// error handler
+router.use((err, req, res, next) => {
+  const { message, statusCode } = err
+  res.status(statusCode).render('error', { message })
+})
+
 
 module.exports = router
