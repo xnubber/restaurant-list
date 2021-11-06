@@ -26,8 +26,8 @@ app.use(express.static('public'))
 
 // error handler
 app.use((err, req, res, next) => {
-  const { message, statusCode } = err
-  res.status(statusCode || 501).render('error', { err })
+  const { message, statusCode = 501 } = err
+  res.status(statusCode).render('error', { err })
 })
 
 // listen
