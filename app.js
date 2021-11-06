@@ -6,6 +6,7 @@ const Restaurant = require('./models/restaurant')
 const restaurantList = require('./restaurant.json')
 const methodOverride = require('method-override')
 const routes = require('./routes')
+const errorHandler = require('./helpers/errorHandler')
 
 // mongoose
 require('./config/mongoose')
@@ -25,10 +26,7 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 // error handler
-app.use((err, req, res, next) => {
-  const { message, statusCode = 501 } = err
-  res.status(statusCode).render('error', { err })
-})
+app.use(errorHandler)
 
 // listen
 app.listen(port, () => {

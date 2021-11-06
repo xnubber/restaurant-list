@@ -33,4 +33,3 @@ router.get('/search', catchAsync(async (req, res, next) => {
 }))
 
 module.exports = router
-
