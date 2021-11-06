@@ -20,7 +20,7 @@ router.post('/', catchAsync(async (req, res, next) => {
 // show page
 router.get('/:id', catchAsync(async (req, res, next) => {
   const { id } = req.params
-  const restaurant = await Restaurant.findById(id).lean()
+  const restaurant = await Restaurant.findById(id).lean().exec()
   if(!restaurant) throw new ExpressError('Page Not Found', 404)
   res.render('show', { restaurant })
 }))
