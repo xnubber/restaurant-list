@@ -8,7 +8,7 @@ A simple web page that have few restaurants, you can see a restaurant's detail o
 - user can add a restaurant(With a fake default img URL)
 - user can edit restaurant's information
 - user can delete restaurant
-- 
+- user can sort restaurants
 
 ## Prerequisites
 - Node.js v14.18.1
