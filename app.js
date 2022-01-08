@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const path = require('path')
-const Restaurant = require('./models/restaurant')
+const session = require('express-session')
 const restaurantList = require('./restaurant.json')
 const methodOverride = require('method-override')
 const routes = require('./routes')
@@ -15,6 +15,17 @@ require('./config/mongoose')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+const sessionConfig = {
+  secret: 'ThisIsMySecret', 
+  resave: false,
+  saveUninitialized: true}
+
+app.use(session(sessionConfig))
+
+
+
+
+
 app.use(routes)
 
 // exprss-handlebars

@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Restaurant = require('../../models/restaurant')
 const catchAsync = require('../../helpers/catchAsync')
 const ExpressError = require('../../helpers/ExpressError')
 const User = require('../../models/user')
@@ -17,7 +16,7 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/register', async (req, res) => {
+router.post('/register', catchAsync(async (req, res) => {
   const {name, email, password, confirmPassword} = req.body
   const user = await User.findOne({email})
   if (user) {
@@ -27,5 +26,6 @@ router.post('/register', async (req, res) => {
   const newUser = new User({ name, email, password })
   await newUser.save()
   res.redirect('/')
-})
+}))
+
 module.exports = router
