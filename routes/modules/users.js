@@ -4,6 +4,7 @@ const catchAsync = require('../../helpers/catchAsync')
 const ExpressError = require('../../helpers/ExpressError')
 const User = require('../../models/user')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 
 router.get('/login', (req, res) => {
@@ -23,7 +24,7 @@ router.post('/register', catchAsync(async (req, res) => {
   const {name, email, password, confirmPassword} = req.body
   const user = await User.findOne({email})
   if (user) {
-    console.log('User already exists.')
+    req.flash('warning_msg', 'User already exists.')
     return res.render('register', { name, email, password, confirmPassword })
   }
   const newUser = new User({ name, email, password })
