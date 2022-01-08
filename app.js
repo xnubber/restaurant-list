@@ -8,6 +8,8 @@ const methodOverride = require('method-override')
 const routes = require('./routes')
 const errorHandler = require('./helpers/errorHandler')
 
+
+const usePassport = require('./config/passport')
 // mongoose
 require('./config/mongoose')
 
@@ -21,7 +23,7 @@ const sessionConfig = {
   saveUninitialized: true}
 
 app.use(session(sessionConfig))
-
+usePassport(app)
 
 
 
