@@ -66,7 +66,7 @@ password: 12345678
 
 user2
 ```
-email: user1@example.com
+email: user2@example.com
 password: 12345678
 ```
 
