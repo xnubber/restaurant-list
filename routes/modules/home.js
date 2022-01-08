@@ -4,7 +4,7 @@ const Restaurant = require('../../models/restaurant')
 const catchAsync = require('../../helpers/catchAsync')
 const ExpressError = require('../../helpers/ExpressError')
 
-router.get('/', catchAsync(async (req, res, next) => {
+router.get('/', catchAsync(async (req, res) => {
   const {name = 'name', sort = 'asc'} = req.query
   let sortOption = {}
   if(name === 'name') {
@@ -19,7 +19,7 @@ router.get('/', catchAsync(async (req, res, next) => {
 }))
 
 // search
-router.get('/search', catchAsync(async (req, res, next) => {
+router.get('/search', catchAsync(async (req, res) => {
   let keyword = req.query.keyword.toLowerCase()
   if (!keyword) res.redirect('/')
   const allRestaurants = await Restaurant.find({}).lean()

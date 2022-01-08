@@ -11,14 +11,14 @@ router.get('/new', (req, res) => {
   res.render('new')
 })
 
-router.post('/', catchAsync(async (req, res, next) => {
+router.post('/', catchAsync(async (req, res) => {
     const newRestaurant = new Restaurant(req.body)
     await newRestaurant.save()
     res.redirect('/')
 }))
 
 // show page
-router.get('/:id', catchAsync(async (req, res, next) => {
+router.get('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean().exec()
   if(!restaurant) throw new ExpressError('Page Not Found', 404)
@@ -26,20 +26,20 @@ router.get('/:id', catchAsync(async (req, res, next) => {
 }))
 
 // update page
-router.get('/:id/edit', catchAsync(async (req, res, next) => {
+router.get('/:id/edit', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findById(id).lean()
   res.render('edit', { restaurant })
 }))
 
-router.patch('/:id', catchAsync(async (req, res, next) => {
+router.patch('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
   res.redirect(`/restaurants/${id}`)
 }))
 
 // delete
-router.delete('/:id', catchAsync(async (req, res, next) => {
+router.delete('/:id', catchAsync(async (req, res) => {
   const { id } = req.params
   await Restaurant.findByIdAndDelete(id)
   res.redirect('/')
