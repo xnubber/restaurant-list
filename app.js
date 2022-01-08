@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 const sessionConfig = {
-  secret: process.env.SESSION_SECRET, 
+  secret: ThisIsMySecret, 
   resave: false,
   saveUninitialized: true
 }
