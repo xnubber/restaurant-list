@@ -15,23 +15,31 @@ A simple web page that can create, store or edit your own restaurants list , and
 - Node.js v14.18.1
 
 ## Install
-clone to local
+1.clone to local
 
 ```
 git clone https://github.com/xnubber/restaurant-list.git
 ```
 
-cd to directory
+2.cd to directory
 
 ```
 cd restaurant-list
 ```
 
-npm install
+3.npm install
 
 ```
 npm install
 ```
+
+4.create .env file
+
+```
+touch .env
+```
+
+5.refer to .env.example to fill out .env file
 
 ## Execution
 add seeds data
@@ -46,7 +54,20 @@ server on
 npm run start
 ```
 
-when the **Express is listening on localhost:3000** show up on the terminal, means you can type **localhost:3000** as URL on web browser to see the web 
+when the **Express is listening on localhost:3000** show up on the terminal, means you can type **localhost:3000** as URL on web browser to see the web.
+
+seed user data below:
+user1
+```
+email: user1@example.com
+password: 12345678
+```
+
+user2
+```
+email: user1@example.com
+password: 12345678
+```
 
 ## Tools
 - Node.js v14.18.1
