@@ -10,10 +10,10 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login'
-}))
+router.post('/login', passport.authenticate('local', {failureRedirect: '/users/login',failureFlash: true}), (req, res) => {
+  req.flash('success_msg', 'Welcome!')
+  res.redirect('/')
+})
 
 router.get('/register', (req, res) => {
   res.render('register')
@@ -33,6 +33,7 @@ router.post('/register', catchAsync(async (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', 'Success Logout')
   res.redirect('/users/login')
 })
 

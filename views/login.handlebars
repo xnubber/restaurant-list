@@ -2,14 +2,21 @@
   <div class="col-md-6 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">Login</h1>
-      <form action="/users/login" method="POST">
+      {{> message}}
+      <form action="/users/login" method="POST" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+          <div class="invalid-feedback">
+            Please enter your email.
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
+          <div class="invalid-feedback">
+            Please enter your password.
+          </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>

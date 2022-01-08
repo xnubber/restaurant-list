@@ -16,6 +16,7 @@ router.post('/', catchAsync(async (req, res) => {
   const { name, location, category, phone, description, image, rating, google_map } = req.body
   const newRestaurant = new Restaurant({ name, location, category, phone, description, image, rating, google_map, userId })
   await newRestaurant.save()
+  req.flash('success_msg', 'Restaurant has been added.')
   res.redirect('/')
 }))
 
@@ -43,7 +44,8 @@ router.patch('/:id', catchAsync(async (req, res) => {
   const _id = req.params.id
   const restaurant = await Restaurant.findOne({_id, userId})
   const { name, location, category, phone, description, image, rating, google_map } = req.body
-  await restaurant.update({ name, location, category, phone, description, image, rating, google_map})
+  await restaurant.updateOne({ name, location, category, phone, description, image, rating, google_map})
+  req.flash('success_msg', 'Restaurant has been edited.')
   res.redirect(`/restaurants/${_id}`)
 }))
 
@@ -53,6 +55,7 @@ router.delete('/:id', catchAsync(async (req, res) => {
   const _id = req.params.id
   const restaurant = await Restaurant.findOne({_id, userId})
   await restaurant.remove()
+  req.flash('success_msg', 'Restaurant has been removed.')
   res.redirect('/')
 }))
 

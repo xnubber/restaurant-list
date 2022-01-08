@@ -7,14 +7,16 @@ module.exports = (app) => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  passport.use(new LocalStrategy({usernameField: 'email'}, async (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true}, async (req, email, password, done) => {
     try{
       const user = await User.findOne({ email })
       if (!user) {
-        return done(null, false, { message: 'That email is not registered!' })
+        req.flash('warning_msg', 'That email is not registered')
+        return done(null, false)
       }
       if (user.password !== password) {
-        return done(null, false, { message: 'Email or Password incorrect.' })
+        req.flash('warning_msg', 'Email or password incorrect')
+        return done(null, false)
       }
       return done(null, user)
     } catch(err) {
