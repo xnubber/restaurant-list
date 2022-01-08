@@ -57,6 +57,7 @@ npm run start
 when the **Express is listening on localhost:3000** show up on the terminal, means you can type **localhost:3000** as URL on web browser to see the web.
 
 seed user data below:
+
 user1
 ```
 email: user1@example.com
