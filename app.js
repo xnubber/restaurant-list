@@ -26,8 +26,18 @@ const sessionConfig = {
 const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+// session
 app.use(session(sessionConfig))
+
+// passport
 usePassport(app)
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 // static
 app.use(express.static('public'))
