@@ -1,6 +1,6 @@
 # Restaurant List
 ![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant.jpg)
-A simple web page that have few restaurants, you can see a restaurant's detail or search specific ones.
+A simple web page that can create, store or edit your own restaurants list , and can see a restaurant's detail or search specific ones.
 
 ## Features
 - searching restaurants by name or category
@@ -8,12 +8,14 @@ A simple web page that have few restaurants, you can see a restaurant's detail o
 - user can add a restaurant(With a fake default img URL)
 - user can edit restaurant's information
 - user can delete restaurant
+- user can login, logout and register
+- user can login and register through facebook
 
 ## Prerequisites
 - Node.js v14.18.1
 
 ## Install
-clone to local device
+clone to local
 
 ```
 git clone https://github.com/xnubber/restaurant-list.git
@@ -55,6 +57,13 @@ when the **Express is listening on localhost:3000** show up on the terminal, mea
 - Bootstrap 4.3.1
 - Font-awesome 5.8.1
 - MongoDB
+- bcryptjs v2.4.3
+- connect-flash 0.1.1
+- dotenv 10.0.0
+- express-session 1.17.2
+- passport 0.5.2
+- passport-facebook 3.0.0
+- passport-local 1.0.0
 
 ## References
 [AC Camp Restaurant List Template -index](https://codepen.io/alpha-camp/pen/yrLbrZ)
