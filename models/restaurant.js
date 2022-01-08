@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-
-const restaurantSchema = new mongoose.Schema({
+const Schema = mongoose.Schema
+const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -34,6 +34,12 @@ const restaurantSchema = new mongoose.Schema({
   google_map: {
     type: String,
     required: true,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
 })
 

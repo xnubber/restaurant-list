@@ -5,6 +5,7 @@ const catchAsync = require('../../helpers/catchAsync')
 const ExpressError = require('../../helpers/ExpressError')
 
 router.get('/', catchAsync(async (req, res) => {
+  const userId = req.user._id
   const {name = 'name', sort = 'asc'} = req.query
   let sortOption = {}
   if(name === 'name') {
@@ -14,7 +15,9 @@ router.get('/', catchAsync(async (req, res) => {
   } else {
     sortOption = { location: `${sort}` }
   }
-  const restaurants = await Restaurant.find({}).lean().sort(sortOption)
+  const restaurants = await Restaurant.find({userId})
+  .lean()
+  .sort(sortOption)
   res.render('index', { restaurants })
 }))
 

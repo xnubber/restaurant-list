@@ -12,36 +12,47 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', catchAsync(async (req, res) => {
-    const newRestaurant = new Restaurant(req.body)
-    await newRestaurant.save()
-    res.redirect('/')
+  const userId = req.user._id
+  const { name, location, category, phone, description, image, rating, google_map } = req.body
+  const newRestaurant = new Restaurant({ name, location, category, phone, description, image, rating, google_map, userId })
+  await newRestaurant.save()
+  res.redirect('/')
 }))
 
 // show page
 router.get('/:id', catchAsync(async (req, res) => {
-  const { id } = req.params
-  const restaurant = await Restaurant.findById(id).lean().exec()
-  if(!restaurant) throw new ExpressError('Page Not Found', 404)
+  const userId = req.user._id
+  const _id = req.params.id
+  const restaurant = await Restaurant.findOne({_id, userId})
+  .lean()
+  .exec()
+  if (!restaurant) throw new ExpressError('Page Not Found', 404)
   res.render('show', { restaurant })
 }))
 
 // update page
 router.get('/:id/edit', catchAsync(async (req, res) => {
-  const { id } = req.params
-  const restaurant = await Restaurant.findById(id).lean()
+  const userId = req.user._id
+  const _id = req.params.id
+  const restaurant = await Restaurant.findOne({_id, userId}).lean()
   res.render('edit', { restaurant })
 }))
 
 router.patch('/:id', catchAsync(async (req, res) => {
-  const { id } = req.params
-  const restaurant = await Restaurant.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-  res.redirect(`/restaurants/${id}`)
+  const userId = req.user._id
+  const _id = req.params.id
+  const restaurant = await Restaurant.findOne({_id, userId})
+  const { name, location, category, phone, description, image, rating, google_map } = req.body
+  await restaurant.update({ name, location, category, phone, description, image, rating, google_map})
+  res.redirect(`/restaurants/${_id}`)
 }))
 
 // delete
 router.delete('/:id', catchAsync(async (req, res) => {
-  const { id } = req.params
-  await Restaurant.findByIdAndDelete(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  const restaurant = await Restaurant.findOne({_id, userId})
+  await restaurant.remove()
   res.redirect('/')
 }))
 

@@ -16,6 +16,9 @@ require('./config/mongoose')
 // 
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
+
+// static
+app.use(express.static('public'))
 app.use(methodOverride('_method'))
 const sessionConfig = {
   secret: 'ThisIsMySecret', 
@@ -39,15 +42,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// static
-app.use(express.static('public'))
-
-
 app.use(routes)
-
-
-
-
 
 // error handler
 app.use(errorHandler)
