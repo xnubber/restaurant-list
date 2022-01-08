@@ -27,7 +27,10 @@ router.get('/:id', catchAsync(async (req, res) => {
   const restaurant = await Restaurant.findOne({_id, userId})
   .lean()
   .exec()
-  if (!restaurant) throw new ExpressError('Page Not Found', 404)
+  if (!restaurant) {
+    req.flash('warning_msg', 'Restaurant not found.')
+    return res.redirect('/')
+  }
   res.render('show', { restaurant })
 }))
 
