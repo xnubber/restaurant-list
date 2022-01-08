@@ -1,5 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const FacebookStrategy = require('passport-facebook').Strategy
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 
@@ -21,6 +22,26 @@ module.exports = (app) => {
         return done(null, false)
       }
       return done(null, user)
+    } catch(err) {
+      return done(err, false)
+    }
+  }))
+
+  passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK,
+    profileFields: ['email', 'displayName']
+  }, async (accessToken, refreshToken, profile, done) => {
+    try{
+      const { name, email } = profile._json
+      const facebookUser = await User.findOne({ email })
+      if (facebookUser) return done(null, facebookUser)
+      const randomPassword = Math.random().toString(36).slice(-8)
+      const hash = await bcrypt.hash(randomPassword, 10)
+      const newFBUser = new User({ name, email, password: hash })
+      await newFBUser.save()
+      return done(null, newFBUser)
     } catch(err) {
       return done(err, false)
     }

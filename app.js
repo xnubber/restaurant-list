@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+
 const path = require('path')
 const session = require('express-session')
 const restaurantList = require('./restaurant.json')
@@ -8,6 +8,11 @@ const methodOverride = require('method-override')
 const routes = require('./routes')
 const errorHandler = require('./helpers/errorHandler')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+const PORT = process.env.PORT
 
 
 const usePassport = require('./config/passport')
@@ -22,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 const sessionConfig = {
-  secret: 'ThisIsMySecret', 
+  secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true
 }
@@ -52,6 +57,6 @@ app.use(routes)
 app.use(errorHandler)
 
 // listen
-app.listen(port, () => {
-  console.log(`Express is listening on localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Express is listening on localhost:${PORT}`)
 })
