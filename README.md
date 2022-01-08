@@ -1,5 +1,5 @@
 # Restaurant List
-![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant.jpg)
+![image](https://github.com/xnubber/restaurant-list/blob/main/public/img/restaurant-final.jpg)
 A simple web page that can create, store or edit your own restaurants list , and can see a restaurant's detail or search specific ones.
 
 ## Features
