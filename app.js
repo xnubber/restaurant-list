@@ -20,23 +20,24 @@ app.use(methodOverride('_method'))
 const sessionConfig = {
   secret: 'ThisIsMySecret', 
   resave: false,
-  saveUninitialized: true}
-
-app.use(session(sessionConfig))
-usePassport(app)
-
-
-
-
-app.use(routes)
-
+  saveUninitialized: true
+}
 // exprss-handlebars
 const exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+app.use(session(sessionConfig))
+usePassport(app)
 
 // static
 app.use(express.static('public'))
+
+
+app.use(routes)
+
+
+
+
 
 // error handler
 app.use(errorHandler)
